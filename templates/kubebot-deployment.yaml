@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kubebot
+  labels:
+    component: kubebot
+spec:
+  replicas: {{ .data_replicas }}
+  template:
+    metadata:
+      labels:
+        component: kubebot
+    spec:
+      containers:
+      - name: kubebot
+        image: harbur/kubebot:latest
+        imagePullPolicy: Always
+        env:
+        - name: KUBEBOT_SLACK_TOKEN
+          value: {{ .kubebot_slack_token }}
+        - name: KUBEBOT_SLACK_CHANNELS_IDS
+          value: {{ .kubebot_slack_channels_ids }}
+        - name: KUBEBOT_SLACK_ADMINS_NICKNAMES
+          value: {{ .kubebot_slack_admins_nicknames }}

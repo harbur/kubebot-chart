@@ -1,0 +1,4 @@
+name: kubebot
+description: Kubernetes chart for Kubebot
+version: 0.1.0
+home: https://github.com/harbur/kubebot-chart
