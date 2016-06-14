@@ -1,4 +1,3 @@
-data_replicas = 1
 kubebot_slack_token = ""
 kubebot_slack_channels_ids = ""
 kubebot_slack_admins_nicknames = ""
