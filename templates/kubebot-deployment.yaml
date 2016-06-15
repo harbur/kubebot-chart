@@ -5,7 +5,7 @@ metadata:
   labels:
     component: kubebot
 spec:
-  replicas: {{ .data_replicas }}
+  replicas: 1
   template:
     metadata:
       labels:
