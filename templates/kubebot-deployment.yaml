@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: kubebot
-        image: harbur/kubebot:latest
+        image: harbur/kubebot:0.1.0
         imagePullPolicy: Always
         env:
         - name: KUBEBOT_SLACK_TOKEN
@@ -22,3 +22,5 @@ spec:
           value: {{ .kubebot_slack_channels_ids }}
         - name: KUBEBOT_SLACK_ADMINS_NICKNAMES
           value: {{ .kubebot_slack_admins_nicknames }}
+        - name: KUBEBOT_SLACK_VALID_COMMANDS
+          value: {{ .kubebot_slack_valid_commands }}
