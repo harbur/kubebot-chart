@@ -17,10 +17,10 @@ spec:
         imagePullPolicy: Always
         env:
         - name: KUBEBOT_SLACK_TOKEN
-          value: {{ .kubebot_slack_token }}
+          value: {{ .Values.kubebot_slack_token }}
         - name: KUBEBOT_SLACK_CHANNELS_IDS
-          value: {{ .kubebot_slack_channels_ids }}
+          value: {{ .Values.kubebot_slack_channels_ids }}
         - name: KUBEBOT_SLACK_ADMINS_NICKNAMES
-          value: {{ .kubebot_slack_admins_nicknames }}
+          value: {{ .Values.kubebot_slack_admins_nicknames }}
         - name: KUBEBOT_SLACK_VALID_COMMANDS
-          value: {{ .kubebot_slack_valid_commands }}
+          value: {{ .Values.kubebot_slack_valid_commands }}
