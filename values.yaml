@@ -1,4 +1,21 @@
-kubebot_slack_token: ""
-kubebot_slack_channels_ids: ""
-kubebot_slack_admins_nicknames: ""
-kubebot_slack_valid_commands: "get describe logs explain"
+rbac: true
+nameOverride: null
+
+commonLabels: {}
+
+image:
+  repository: harbur/kubebot
+  tag: 0.1.0
+  image: Always
+
+slack:
+  token: ""
+  channel_ids: []
+  admin_nicknames: []
+  
+commands:
+  - get
+  - describe
+  - logs
+  - explain
+  - version

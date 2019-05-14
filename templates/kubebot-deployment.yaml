@@ -1,26 +1,33 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kubebot
+  name: "{{ template "kubebot.name" . }}"
+  namespace: {{ .Release.Namespace | quote }}
   labels:
-    component: kubebot
+{{ include "kubebot.labels" . | indent 4 }}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        component: kubebot
+{{ include "kubebot.labels" . | indent 8 }}
     spec:
+      {{- if .Values.rbac }}
+      serviceAccountName: "{{ template "kubebot.name" . }}"
+      {{- end }}
       containers:
       - name: kubebot
-        image: harbur/kubebot:0.1.0
-        imagePullPolicy: Always
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: "{{ .Values.image.pullPolicy }}"
         env:
         - name: KUBEBOT_SLACK_TOKEN
-          value: {{ .Values.kubebot_slack_token }}
+          valueFrom:
+            secretKeyRef:
+              name: "{{ template "kubebot.name" . }}"
+              key: token
         - name: KUBEBOT_SLACK_CHANNELS_IDS
-          value: {{ .Values.kubebot_slack_channels_ids }}
+          value: {{ join " " .Values.slack.channel_ids | quote }}
         - name: KUBEBOT_SLACK_ADMINS_NICKNAMES
-          value: {{ .Values.kubebot_slack_admins_nicknames }}
+          value: {{ join " " .Values.slack.admin_nicknames | quote }}
         - name: KUBEBOT_SLACK_VALID_COMMANDS
-          value: {{ .Values.kubebot_slack_valid_commands }}
+          value: {{ join " " .Values.commands | quote }}
