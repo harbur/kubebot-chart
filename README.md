@@ -4,24 +4,17 @@
 
 ## Kubebot
 
-[Kubebot](https://github.com/harbur/kubebot) is a Kubernetes chatbot for Slack.  
+[Kubebot](https://github.com/harbur/kubebot) is a Kubernetes chatbot for Slack.
 ## Setup
 
 1. Clone this repository
 1. [Create a new bot](https://my.slack.com/services/new/bot) user integration on Slack and get the `token`
-1. Update `values.toml`:
-  1. set `kubebot_slack_token` with the `token` you got
-  2. set `kubebot_slack_admins_nicknames` with the nicknames (without `@`) of the users that you want to be able to interact with Kubebot (use a space as separator)
-  3. set `kubebot_slack_channels_ids` with the IDs of the channels you want kubebot to interact (use a space as separator). You can get the ids of your team's channels in `https://slack.com/api/channels.list?token={REPLACE WITH YOUR TOKEN}`. 
-  4. [optional] You can edit `kubebot_slack_valid_commands` to change which commands Kubebot is able to run.
-
+1. Update `values.yaml`:
+  1. `slack.token` should be the `token` for your bot integration
+  1. `slack.admin_nicknames` sould be a list of the nicknames (without `@`) of the users that you want to be able to interact with Kubebot
+  1. Set `slack.channel_ids` sould be a list of the channel IDs that you want kubebot to able to interact in. You can get the IDs of your team's channels in `https://slack.com/api/channels.list?token={REPLACE WITH YOUR TOKEN}`
+  1. [optional] You can add/remove items from `commands` list to change which commands Kubebot is able to run
 
 ## Run
 
-The easiest way to deploy Kubebot to your Kubernetes cluster is using [Tide](https://github.com/harbur/tide):
-
-```
-tide up .
-```
-
-
+`helm install ./kubebot-chart --name kubebot --namespace kubebot --values values.yaml`
